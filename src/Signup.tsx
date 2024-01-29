@@ -9,16 +9,16 @@ function App() {
 
   return (
     <>
-       <div className=" relative bg-neu-100">
+       <div className="relative bg-neu-100">
     <header className="w-full lg:w-1/2 py-4 lg:py-6 px-3 lg:px-20 flex justify-between bg-neu-100 sticky lg:fixed top-0 z-10">
-      <a href="./index.html">
-        <img src="./images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
-      </a>
-      <a href="#" className="text-white lg:hidden">三</a>
+      <Link to="/">
+        <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
+      </Link>
+      <button className="text-white lg:hidden">三</button>
     </header>
     <div className="lg:h-dvh items-start w-full relative grid grid-cols-1 lg:grid-cols-2">
       <div className="hidden min-h-dvh h-full  lg:block bg-[url('https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"></div>
-      <div className=" h-full  font-bold px-5 overflow-y-auto  relative">
+      <div className=" h-full  font-bold px-5 overflow-y-auto relative bg-[url('images/mobile-deco-login.png')] lg:bg-[url('../images/desktop-deco-login.png')] bg-center bg-no-repeat bg-contain">
         <div className="h-full w-full grid items-center">
           <div className="max-w-[416px] w-full mx-auto  py-5 lg:py-20 ">
           <p className="text-sm lg:text-base mb-2 text-primary-100">享樂酒店，誠摯歡迎</p>
@@ -123,12 +123,10 @@ function App() {
             <p>
               <span className="text-white">已經有會員了嗎？</span>
               <Link to="/login" className="text-primary-100 hover:text-primary-120 underline ml-2">立即登入</Link>
-
             </p>
           </form>
         </div>
         </div>
-
       </div>
     </div>
   </div>

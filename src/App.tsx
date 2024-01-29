@@ -1,12 +1,13 @@
-// import { useState } from 'react'
+// import React, { useEffect, useRef } from 'react'
 import { Link } from "react-router-dom";
+import FoodList from "./FoodList.tsx"
 
 function App() {
   return (
     <>
      <header className="w-full flex items-center justify-between text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-20">
       <a href="#">
-        <img src="./images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
+        <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
       </a>
       <button className="lg:hidden">三</button>
       <div className="hidden lg:flex gap-4">
@@ -41,8 +42,8 @@ function App() {
     </section>
     {/* 最新消息 */}
     <section id="news" className="bg-primary-10  py-20 lg:py-30 px-5 lg:px-20 relative">
-      <img src="./images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute left-50 -bottom-20" />
-      <img src="./images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute right-[180px] top-[100px]" />
+      <img src="images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute left-50 -bottom-20" />
+      <img src="images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute right-[180px] top-[100px]" />
       <div className="container lg:flex ">
         <div className="mr-20 mb-10 lg:mb-0">
           <h2 className="text-[32px] lg:text-[48px] text-primary-100 tracking-[2.4px] font-bold">最新<br />消息</h2>
@@ -100,7 +101,7 @@ function App() {
     </div>
   </section>
   {/* <!-- 房間介紹 --> */}
-  <section className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat">
+  <section className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat">
     <div className="lg:flex items-end">
       <div className="w-full lg:w-[900px] h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
       <div className="text-white lg:px-20">
@@ -117,146 +118,86 @@ function App() {
   </section>
   {/* <!-- 佳餚美饌 --> */}
   <section className="relative">
-    <img src="./images/desktop-deco-Line-1.png" alt="" className="absolute  left-10 -bottom-20" />
-    <img src="./images/desktop-deco-dot.png" alt="" className="absolute right-20 -top-10" />
+    <img src="images/desktop-deco-Line-1.png" alt="" className="absolute  left-10 -bottom-20" />
+    <img src="images/desktop-deco-dot.png" alt="" className="absolute right-20 -top-10" />
     <div className="bg-light px-5 lg:px-20 py-20 lg:py-30  overflow-x-hidden">
       <div className="container">
         <div className="flex items-center mb-10 lg:mb-20">
           <h2 className="text-primary-100 text-[32px] lg:text-[48px] tracking-[2.4px] font-bold">佳餚<br />美饌</h2>
           <div className="w-40 lg:w-50 h-[2px] bg-gradient-primary ml-10"></div>
         </div>
-  
-        <div id="food_list_container" className="h-[480px] lg:h-[600px]  relative select-none">
-          <div id="food_list" className="w-[400%] sm:w-[300%] md:w-[220%] lg:w-[calc(166.667%_+_16px)] h-full flex justify-between absolute left-0">
-            <div className="h-full w-[calc(20%_-_12px)] lg:w-[20%] mr-6 rounded-lg bg-[url('https://images.unsplash.com/photo-1624938823487-d62ba4a5cf0f')] bg-center bg-cover text-white flex items-end">
-              <div className="p-4 lg:p-6 backdrop-blur-lg">
-                <div className="flex items-center mb-4 lg:mb-6">
-                  <h3 className="mr-auto text-2xl font-bold">海霸</h3>
-                  <p className="text-sm mr-2 lg:mr-4">SUN-MON</p>
-                  <p className="text-sm">11:00 - 20:30</p>
-                </div>
-                <p className="font-this">
-                  以新鮮海產料理聞名，我們的專業廚師選用高雄當地的海鮮，每一道菜都充滿海洋的鮮美與清甜。無論是烤魚、蒸蝦還是煮蛤蜊，都能讓您品嚐到最新鮮的海洋風味。
-                </p>
-              </div>
-            </div>
-            <div className="h-full w-[calc(20%_-_12px)] lg:w-[20%] mr-6 rounded-lg bg-[url('https://images.unsplash.com/photo-1628543108325-1c27cd7246b3')] bg-center bg-cover text-white flex items-end">
-              <div className="p-4 lg:p-6 backdrop-blur-lg">
-                <div className="flex items-center mb-4 lg:mb-6">
-                  <h3 className="mr-auto text-2xl font-bold">日食</h3>
-                  <p className="text-sm mr-2 lg:mr-4">SUN-MON</p>
-                  <p className="text-sm">17:00 - 22:00</p>
-                </div>
-                <p className="font-this">
-                  為您提供優質的牛排，每一塊肉都來自頂級的牛肉，經過專業廚師的巧手烹調，口感豐滿、風味絕佳。搭配我們的特製醬料，讓您的味蕾享受一場美味的盛宴。
-                </p>
-              </div>
-            </div>
-            <div className="h-full w-[calc(20%_-_12px)] lg:w-[20%] mr-6 rounded-lg bg-[url('https://images.unsplash.com/photo-1621916805571-2e804f82170c')] bg-center bg-cover text-white flex items-end">
-              <div className="p-4 lg:p-6 backdrop-blur-lg">
-                <div className="flex items-center mb-4 lg:mb-6">
-                  <h3 className="mr-auto text-2xl font-bold">山臻</h3>
-                  <p className="text-sm mr-2 lg:mr-4">SUN-MON</p>
-                  <p className="text-sm">11:00 - 20:30</p>
-                </div>
-                <p className="font-this">
-                  帶您進入一次辣味與鮮香兼具的川菜美食之旅。我們的廚師掌握正宗的川菜烹調技巧，從麻辣鍋到口水雞，每一道菜都有其獨特的風味，讓您回味無窮。
-                </p>
-              </div>
-            </div>
-            <div className="h-full w-[calc(20%_-_12px)] lg:w-[20%] mr-6 rounded-lg bg-[url('https://images.unsplash.com/photo-1467003909585-2f8a72700288')] bg-center bg-cover text-white flex items-end">
-              <div className="p-4 lg:p-6 backdrop-blur-lg">
-                <div className="flex items-center mb-4 lg:mb-6">
-                  <h3 className="mr-auto text-2xl font-bold">月永</h3>
-                  <p className="text-sm mr-2 lg:mr-4">SUN-MON</p>
-                  <p className="text-sm">11:00 - 20:00</p>
-                </div>
-                <p className="font-this">
-                  從鮮美的海鮮、經典的牛排，到各國的特色美食，我們都一應俱全。在這裡，您可以品嚐到世界各地的美食，每一道菜都由專業廚師用心製作，讓您在享受美食的同時，也能感受到我們的熱情與用心。
-                </p>
-              </div>
-            </div>
-            <div className="h-full w-[calc(20%_-_12px)] lg:w-[20%] rounded-lg bg-[url('https://images.unsplash.com/photo-1517084166762-9edca41416e6')] bg-center bg-cover text-white flex items-end">
-              <div className="p-4 lg:p-6 backdrop-blur-lg">
-                <div className="flex items-center mb-4 lg:mb-6">
-                  <h3 className="mr-auto text-2xl font-bold">天潮</h3>
-                  <p className="text-sm mr-2 lg:mr-4">SUN-MON</p>
-                  <p className="text-sm">14:00 - 19:30</p>
-                </div>
-                <p className="font-this">
-                  我們提供各種精緻甜點與糕點，無論您喜歡的是巧克力蛋糕、法式馬卡龍，還是台灣傳統的糕點，都能在這裡找到。讓我們的甜點帶您進入一場繽紛的甜蜜旅程。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <FoodList />
       </div>
     </div>
   </section>
   {/* <!-- 交通方式 --> */}
-<section className="bg-neu-100 py-20 lg:pt-30 px-5 lg:px-20">
-  <div className="container">
-    <div className="flex items-center mb-10 lg:mb-20">
-      <h2 className="text-primary-100 text-[32px] lg:text-[48px] tracking-[2.4px] font-bold">交通<br />方式</h2>
-      <div className="w-40 lg:w-50 h-[2px] bg-gradient-primary ml-10"></div>
-    </div>
-    <p className="mb-4 text-white">台灣高雄市新興區六角路123號</p>
-     <div className="w-full h-[360px] bg-[url('https://s3-alpha-sig.figma.com/img/4dd7/3a80/9458afb0d3233560c66a7177e1d6ade3?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FpsFej~R-sQ0QKJvUqddH6CepLGuKe4BGr8-k6jLrreBdb08PclhdpcEi4Miz6s~xX6Y24xXBUo0Ue5Y7NO7hQwwwa13vsLryk-1ivJ9OYW~8nqSZ6pUmbW4669bW4zKOx3lVuIHwYHhAD0WN0j6HLKsK4HmIIBhqgvu58Bsp0KRuBi2DPGa-GNzghltDj9-FiSKOtqby83ZEmvmPrDaioXWVtfHvgAI48BsrFnadL7f9P416Vd1xcelNn5k5mIE1u2kx2Qdj422GqWDe4MDeeHY13ZyrAbAydsrXIFtbzlVT2Gv5Bp~j8p6Gt0oMstj-3uEx8y-A~7NddjBoYQlRA__')] bg-cover bg-center mb-10"></div>
-     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
-      <div className="">
-        <img src="./images/traffic-car.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
-        <h3 className="lg:text-2xl mb-2">自行開車</h3>
-        <p className="text-sm lg:text-normal font-normal">如果您選擇自行開車，可以透過國道一號下高雄交流道，往市區方向行駛，並依路標指示即可抵達「享樂酒店」。飯店內設有停車場，讓您停車方便。</p>
+  <section className="bg-neu-100 py-20 lg:pt-30 px-5 lg:px-20">
+    <div className="container">
+      <div className="flex items-center mb-10 lg:mb-20">
+        <h2 className="text-primary-100 text-[32px] lg:text-[48px] tracking-[2.4px] font-bold">交通<br />方式</h2>
+        <div className="w-40 lg:w-50 h-[2px] bg-gradient-primary ml-10"></div>
       </div>
-      <div>
-        <img src="./images/traffic-train.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
-        <h3 className="lg:text-2xl mb-2">高鐵/火車</h3>
-        <p className="text-sm lg:text-normal font-normal">如果您是搭乘高鐵或火車，可於左營站下車，外頭有計程車站，搭乘計程車約20分鐘即可抵達。或者您也可以轉乘捷運紅線至中央公園站下車，步行約10分鐘便可抵達。</p>
-      </div>
-      <div>
-        <img src="./images/traffic-luxurycar.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
-        <h3 className="lg:text-2xl mb-2">禮賓車服務</h3>
-        <p className="text-sm lg:text-normal font-normal">承億酒店提供禮賓專車接送服務，但因目的地遠近會有不同的收費，請撥打電話將由專人為您服務洽詢專線：(07)123-4567</p>
-      </div>
-     </div>
-  </div>
-</section>
-<img src="./images/mobile-deco-Line.png" alt="" className="lg:hidden bg-neu-100" />
-<img src="./images/desktop-deco-Line-2.png" alt="" className="hidden lg:block bg-neu-100" />
-{/* <!-- Footer --> */}
-<footer className="bg-neu-100  text-white px-5 lg:px-20">
-  <div className="container py-20 lg:pb-30">
-    <div className="lg:flex justify-between">
-      <div className="mb-10 lg:mb-0">
-        <a href="#" className="block w-[196px] h-[72px] mb-10">
-          享樂酒店
-        </a>
-        <div className="flex gap-4">
-          <a href="#" className="block w-10 h-10 border border-white rounded-full">line</a>
-          <a href="#" className="block w-10 h-10 border border-white rounded-full">ig</a>
-        </div>
-      </div>
-      <div className="lg:flex gap-20">
-        <div>
-          <div className="mb-2">TEL</div>
-          <div className="mb-4 lg:mb-10">+886-7-1234567</div>
-          <div className="mb-2">FAX</div>
-          <div className="mb-4">+886-7-1234567</div>
+      <p className="mb-4 text-white">台灣高雄市新興區六角路123號</p>
+      <div className="w-full h-[360px] bg-[url('https://s3-alpha-sig.figma.com/img/4dd7/3a80/9458afb0d3233560c66a7177e1d6ade3?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FpsFej~R-sQ0QKJvUqddH6CepLGuKe4BGr8-k6jLrreBdb08PclhdpcEi4Miz6s~xX6Y24xXBUo0Ue5Y7NO7hQwwwa13vsLryk-1ivJ9OYW~8nqSZ6pUmbW4669bW4zKOx3lVuIHwYHhAD0WN0j6HLKsK4HmIIBhqgvu58Bsp0KRuBi2DPGa-GNzghltDj9-FiSKOtqby83ZEmvmPrDaioXWVtfHvgAI48BsrFnadL7f9P416Vd1xcelNn5k5mIE1u2kx2Qdj422GqWDe4MDeeHY13ZyrAbAydsrXIFtbzlVT2Gv5Bp~j8p6Gt0oMstj-3uEx8y-A~7NddjBoYQlRA__')] bg-cover bg-center mb-10"></div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
+        <div className="">
+          <img src="images/traffic-car.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
+          <h3 className="lg:text-2xl mb-2">自行開車</h3>
+          <p className="text-sm lg:text-normal font-normal">如果您選擇自行開車，可以透過國道一號下高雄交流道，往市區方向行駛，並依路標指示即可抵達「享樂酒店」。飯店內設有停車場，讓您停車方便。</p>
         </div>
         <div>
-          <div className="mb-2">MAIL</div>
-          <div className="mb-4 lg:mb-10">elh@hexschool.com</div>
-          <div className="mb-2">WEB</div>
-          <div className="mb-4">www.elhhexschool.com.tw</div>
+          <img src="images/traffic-train.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
+          <h3 className="lg:text-2xl mb-2">高鐵/火車</h3>
+          <p className="text-sm lg:text-normal font-normal">如果您是搭乘高鐵或火車，可於左營站下車，外頭有計程車站，搭乘計程車約20分鐘即可抵達。或者您也可以轉乘捷運紅線至中央公園站下車，步行約10分鐘便可抵達。</p>
+        </div>
+        <div>
+          <img src="images/traffic-luxurycar.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
+          <h3 className="lg:text-2xl mb-2">禮賓車服務</h3>
+          <p className="text-sm lg:text-normal font-normal">承億酒店提供禮賓專車接送服務，但因目的地遠近會有不同的收費，請撥打電話將由專人為您服務洽詢專線：(07)123-4567</p>
         </div>
       </div>
     </div>
-    <div className="lg:flex justify-between mt-20 ">
-      <div className="mb-4 lg:mb-0">806023 台灣高雄市新興區六角路123號</div>
-      <div>© 享樂酒店 2023 All Rights Reserved.</div>
+  </section>
+  <img src="images/mobile-deco-Line.png" alt="" className="lg:hidden bg-neu-100" />
+  <img src="images/desktop-deco-Line-2.png" alt="" className="hidden lg:block bg-neu-100" />
+  {/* <!-- Footer --> */}
+  <footer className="bg-neu-100  text-white px-5 lg:px-20">
+    <div className="container py-20 lg:pb-30">
+      <div className="lg:flex justify-between">
+        <div className="mb-10 lg:mb-0">
+          <a href="#" className="block w-[196px] h-[72px] mb-10">
+            享樂酒店
+          </a>
+          <div className="flex gap-4">
+            <a href="#" className="w-10 h-10 border border-white rounded-full flex justify-center items-center">
+              <img src="images/social-line.png" alt="" />
+            </a>
+            <a href="#" className="w-10 h-10 border border-white rounded-full flex justify-center items-center">
+            <img src="images/social-instagram.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div className="lg:flex gap-20">
+          <div>
+            <div className="mb-2">TEL</div>
+            <div className="mb-4 lg:mb-10">+886-7-1234567</div>
+            <div className="mb-2">FAX</div>
+            <div className="mb-4">+886-7-1234567</div>
+          </div>
+          <div>
+            <div className="mb-2">MAIL</div>
+            <div className="mb-4 lg:mb-10">elh@hexschool.com</div>
+            <div className="mb-2">WEB</div>
+            <div className="mb-4">www.elhhexschool.com.tw</div>
+          </div>
+        </div>
+      </div>
+      <div className="lg:flex justify-between mt-20 ">
+        <div className="mb-4 lg:mb-0">806023 台灣高雄市新興區六角路123號</div>
+        <div>© 享樂酒店 2023 All Rights Reserved.</div>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
     </>
   )
