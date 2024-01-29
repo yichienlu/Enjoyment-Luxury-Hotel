@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #BE9C7C 0%, #FFF 100%);
+}
+.bg-gradient-primary-vertical {
+  background: linear-gradient(180deg, #BE9C7C 0%, #FFF 100%);
+}
+.bg-about {
+  background: linear-gradient(180deg, rgba(20, 15, 10, 0.80) 0%, rgba(190, 156, 124, 0.80) 100%);
+}
+
+.slide-width {
+  width: calc(20% - 18px)
+}
+
+.lg-room {
+  background-image: 
+  url('./images/desktop-deco-BG.png') bottom no-repeat, 
+  url('../images/desktop-deco-BG.png') no-repeat
+}
