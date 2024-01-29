@@ -223,6 +223,40 @@ function App() {
 </section>
 <img src="./images/mobile-deco-Line.png" alt="" className="lg:hidden bg-neu-100" />
 <img src="./images/desktop-deco-Line-2.png" alt="" className="hidden lg:block bg-neu-100" />
+{/* <!-- Footer --> */}
+<footer className="bg-neu-100  text-white px-5 lg:px-20">
+  <div className="container py-20 lg:pb-30">
+    <div className="lg:flex justify-between">
+      <div className="mb-10 lg:mb-0">
+        <a href="#" className="block w-[196px] h-[72px] mb-10">
+          享樂酒店
+        </a>
+        <div className="flex gap-4">
+          <a href="#" className="block w-10 h-10 border border-white rounded-full">line</a>
+          <a href="#" className="block w-10 h-10 border border-white rounded-full">ig</a>
+        </div>
+      </div>
+      <div className="lg:flex gap-20">
+        <div>
+          <div className="mb-2">TEL</div>
+          <div className="mb-4 lg:mb-10">+886-7-1234567</div>
+          <div className="mb-2">FAX</div>
+          <div className="mb-4">+886-7-1234567</div>
+        </div>
+        <div>
+          <div className="mb-2">MAIL</div>
+          <div className="mb-4 lg:mb-10">elh@hexschool.com</div>
+          <div className="mb-2">WEB</div>
+          <div className="mb-4">www.elhhexschool.com.tw</div>
+        </div>
+      </div>
+    </div>
+    <div className="lg:flex justify-between mt-20 ">
+      <div className="mb-4 lg:mb-0">806023 台灣高雄市新興區六角路123號</div>
+      <div>© 享樂酒店 2023 All Rights Reserved.</div>
+    </div>
+  </div>
+</footer>
 
     </>
   )
