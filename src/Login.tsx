@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-    <div className="bg-neu-100">
+    <div className="bg-neu-100 min-h-[100dvh]">
       <header className="w-full lg:w-1/2 py-4 lg:py-6 px-3 lg:px-20 flex justify-between bg-neu-100 sticky lg:fixed top-0 z-10">
       <Link to="/">
         <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />

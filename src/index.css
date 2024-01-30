@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  font-family: 'Noto Serif TC', serif !important;
+}
+
 .bg-gradient-primary {
   background: linear-gradient(90deg, #BE9C7C 0%, #FFF 100%);
 }
