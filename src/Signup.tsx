@@ -5,8 +5,6 @@ import ZipCodeMap from "./zipcodes"
 
 function App() {
   let navigate = useNavigate();
-  console.log(navigate)
- 
 
   const [step, setStep] = useState(1)
   const [checkPasswordInput, setCheckPasswordInput] = useState("")
@@ -18,7 +16,6 @@ function App() {
 
   function findZipcode(){
     const area = `${formData.city}${formData.district}`
-    console.log(area)
     return ZipCodeMap.find(item=>item.detail.includes(area))?.zipcode
   }
 
@@ -47,7 +44,7 @@ function App() {
         detail: formData.address
       }
     }
-    console.log(data)
+
     // 打 API
     axios.post('https://enjoyment-luxury-api.onrender.com/api/v1/user/signup', data)
     .then(res=>{
@@ -55,7 +52,10 @@ function App() {
       alert('註冊成功')
       navigate('/')
     })
-    .catch(err=>console.dir(err))
+    .catch(err=>{
+      // console.log(err.response.data.message)
+      alert(err.response.data.message)
+    })
 
   }
 
@@ -103,18 +103,18 @@ function App() {
           {/* <!-- Step Graph --> */}
           <div className="flex items-center text-sm lg:text-base py-4 mb-10">
             <div className="grow-0 shrink-0">
-              <div className="w-8 h-8 flex justify-center items-center rounded-full mx-auto bg-primary-100">
+              <div className="w-8 h-8 flex justify-center items-center rounded-full mx-auto bg-primary-100 cursor-pointer" onClick={()=>setStep(1)}>
                 <span className={`text-white ${step==2 ? 'hidden' : 'inline'}`}>1</span>
                 <span className={`text-white ${step==1 ? 'hidden' : 'inline'}`}>✓</span>
               </div>
-              <p className="mt-1 text-white">輸入信箱及密碼</p>
+              <p className="mt-1 text-white cursor-pointer" onClick={()=>setStep(1)}>輸入信箱及密碼</p>
             </div>
             <div className={`grow shrink h-[2px] mx-2 ${step==1 ? 'bg-neu-60' : 'bg-neu-40'}`}></div>
             <div className="grow-0 shrink-0">
-              <div className={`w-8 h-8 flex justify-center items-center rounded-full mx-auto  ${step==1 ? 'border border-neu-60' : 'bg-primary-100'}`}>
+              <div className={`w-8 h-8 flex justify-center items-center rounded-full mx-auto  ${step==1 ? 'border border-neu-60' : 'bg-primary-100'} cursor-pointer`} onClick={()=>setStep(2)}>
                 <span className="text-white">2</span>
               </div>
-              <p className={`mt-1 ${step==1? 'text-neu-60' : 'text-white'}`}>填寫基本資料</p>
+              <p className={`mt-1 ${step==1? 'text-neu-60' : 'text-white'} cursor-pointer`} onClick={()=>setStep(2)}>填寫基本資料</p>
             </div>
           </div>
           <form className=" appearance-none text-sm lg:text-base " onSubmit={handleSubmit}>
