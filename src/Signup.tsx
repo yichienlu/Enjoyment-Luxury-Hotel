@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useNavigate, Route, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 import ZipCodeMap from "./zipcodes"
 
 function App() {
   let navigate = useNavigate();
   console.log(navigate)
+ 
 
   const [step, setStep] = useState(1)
   const [checkPasswordInput, setCheckPasswordInput] = useState("")
@@ -52,11 +53,9 @@ function App() {
     .then(res=>{
       console.log(res.data)
       alert('註冊成功')
-      
+      navigate('/')
     })
     .catch(err=>console.dir(err))
-
-
 
   }
 
@@ -132,7 +131,7 @@ function App() {
               <label htmlFor="checkPasswordInput" className="text-white block mb-2">確認密碼</label>
               <input type="password" id="checkPasswordInput" placeholder="請再輸入一次密碼" minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={checkPasswordInput} onChange={e=>setCheckPasswordInput(e.target.value)} />
             </div>
-            <button type="button" className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg my-10" onClick={()=>nextStep()}>下一步</button>
+            <button type="button" className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg my-10" onClick={()=>nextStep()} disabled={checkPasswordInput==formData.password && formData.email && formData.password ? false : true}>下一步</button>
             </section>
 
             <section id="step2" className={`text-white ${step==2 ? 'block' : 'hidden'}`}>
