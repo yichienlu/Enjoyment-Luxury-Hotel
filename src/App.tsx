@@ -9,7 +9,7 @@ function App() {
       <a href="#">
         <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
       </a>
-      <button className="lg:hidden">三</button>
+      <button className="lg:hidden">-</button>
       <div className="hidden lg:flex gap-4">
         <a href="#" className="block p-4 hover:text-primary-100">客房旅宿</a>
         <Link to="/login" className="block p-4 hover:text-primary-100">會員登入</Link>
@@ -103,7 +103,7 @@ function App() {
   {/* <!-- 房間介紹 --> */}
   <section className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat">
     <div className="lg:flex items-end">
-      <div className="w-full lg:w-[900px] h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
+      <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
       <div className="text-white lg:px-20">
         <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">尊爵雙人房</h3>
         <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。</p>
@@ -166,7 +166,7 @@ function App() {
       <div className="lg:flex justify-between">
         <div className="mb-10 lg:mb-0">
           <a href="#" className="block w-[196px] h-[72px] mb-10">
-            享樂酒店
+            <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
           </a>
           <div className="flex gap-4">
             <a href="#" className="w-10 h-10 border border-white rounded-full flex justify-center items-center">
@@ -178,19 +178,19 @@ function App() {
           </div>
         </div>
         <div className="lg:flex gap-20">
-          <div>
-            <div className="mb-2">TEL</div>
-            <div className="mb-4 lg:mb-10">+886-7-1234567</div>
-            <div className="mb-2">FAX</div>
-            <div className="mb-4">+886-7-1234567</div>
-          </div>
-          <div>
-            <div className="mb-2">MAIL</div>
-            <div className="mb-4 lg:mb-10">elh@hexschool.com</div>
-            <div className="mb-2">WEB</div>
-            <div className="mb-4">www.elhhexschool.com.tw</div>
-          </div>
+        <div>
+          <div className="mb-2 font-bold">TEL</div>
+          <a href="tel:+886-7-1234567" className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base">+886-7-1234567</a>
+          <div className="mb-2 font-bold">FAX</div>
+          <a href="tel:+886-7-1234567" className="block mb-4 hover:text-primary-100 text-sm lg:text-base">+886-7-1234567</a>
         </div>
+        <div>
+          <div className="mb-2 font-bold">MAIL</div>
+          <a href="mailto:elh@hexschool.com" className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base">elh@hexschool.com</a>
+          <div className="mb-2 font-bold">WEB</div>
+          <a href="https://www.elhhexschool.com.tw" target="_blank" className="block mb-4 hover:text-primary-100 text-sm lg:text-base">www.elhhexschool.com.tw</a>
+        </div>
+      </div>
       </div>
       <div className="lg:flex justify-between mt-20 ">
         <div className="mb-4 lg:mb-0">806023 台灣高雄市新興區六角路123號</div>

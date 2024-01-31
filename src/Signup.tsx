@@ -78,7 +78,7 @@ function App() {
       <Link to="/">
         <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
       </Link>
-      <button className="text-white lg:hidden">三</button>
+      <button className="text-white lg:hidden">-</button>
     </header>
     <div className="lg:h-dvh items-start w-full relative grid grid-cols-1 lg:grid-cols-2">
       <div className="hidden min-h-dvh h-full  lg:block bg-[url('https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"></div>
