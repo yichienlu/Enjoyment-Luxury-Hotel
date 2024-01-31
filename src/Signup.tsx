@@ -4,7 +4,7 @@ import axios from 'axios';
 import ZipCodeMap from "./zipcodes"
 
 function App() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [step, setStep] = useState(1)
   const [checkPasswordInput, setCheckPasswordInput] = useState("")
