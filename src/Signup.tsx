@@ -45,7 +45,6 @@ function App() {
       }
     }
 
-    // 打 API
     axios.post('https://enjoyment-luxury-api.onrender.com/api/v1/user/signup', data)
     .then(res=>{
       console.log(res.data)
@@ -53,22 +52,12 @@ function App() {
       navigate('/')
     })
     .catch(err=>{
-      // console.log(err.response.data.message)
       alert(err.response.data.message)
     })
-
   }
 
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>){
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>){
     e.preventDefault()
-    const value = e.target.value
-    const name = e.target.name
-    setFormData({
-      ...formData,
-      [name]:value
-    })
-  }
-  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>){
     const value = e.target.value
     const name = e.target.name
     setFormData({
@@ -81,8 +70,6 @@ function App() {
     event.preventDefault()
     formatFormData()
   }
-
-
 
   return (
     <>
@@ -111,10 +98,10 @@ function App() {
             </div>
             <div className={`grow shrink h-[2px] mx-2 ${step==1 ? 'bg-neu-60' : 'bg-neu-40'}`}></div>
             <div className="grow-0 shrink-0">
-              <div className={`w-8 h-8 flex justify-center items-center rounded-full mx-auto  ${step==1 ? 'border border-neu-60' : 'bg-primary-100'} cursor-pointer`} onClick={()=>setStep(2)}>
+              <div className={`w-8 h-8 flex justify-center items-center rounded-full mx-auto  ${step==1 ? 'border border-neu-60' : 'bg-primary-100'} `}>
                 <span className="text-white">2</span>
               </div>
-              <p className={`mt-1 ${step==1? 'text-neu-60' : 'text-white'} cursor-pointer`} onClick={()=>setStep(2)}>填寫基本資料</p>
+              <p className={`mt-1 ${step==1? 'text-neu-60' : 'text-white'}`}>填寫基本資料</p>
             </div>
           </div>
           <form className=" appearance-none text-sm lg:text-base " onSubmit={handleSubmit}>
@@ -146,17 +133,8 @@ function App() {
             <div className="mb-4">
               <label htmlFor="yearSelect" className="text-white block mb-2">生日</label>
               <div className="grid grid-cols-3 gap-2 font-normal ">
-                {/* <!-- <select name="" id="yearSelect" className="p-4 rounded-lg">
-                  <option value="1990" className="">1990</option>
-                </select>
-                <select name="" id="monthSelect" className="p-4 rounded-lg">
-                  <option value="8">8月</option>
-                </select>
-                <select name="" id="daySelect" className="p-4 rounded-lg">
-                  <option value="15">15日</option>
-                </select> --> */}
                 <input type="number" min="1900" max="2099" step="1" name="year" placeholder="請輸入年份"  className="p-4 rounded-lg text-black"  value={formData.year} onChange={handleInputChange}/>
-                <select name="month" id="monthSelect" className="p-4 rounded-lg text-black" value={formData.month} onChange={handleSelectChange}>
+                <select name="month" id="monthSelect" className="p-4 rounded-lg text-black" value={formData.month} onChange={handleInputChange}>
                   <option value="" disabled>請選擇月份</option>
                   <option value="1">1月</option>
                   <option value="2">2月</option>
@@ -177,12 +155,6 @@ function App() {
             <div className="mb-4">
               <label htmlFor="countySelect" className="text-white block mb-2">地址</label>
               <div className="grid grid-cols-2 gap-2">
-                {/* <!-- <select name="" id="countySelect" className="p-4 rounded-lg">
-                  <option value="高雄市">高雄市</option>
-                </select> --> */}
-                {/* <!-- <select name="" id="districtSelect" className="p-4 rounded-lg">
-                  <option value="新興區">新興區</option>
-                </select> --> */}
                 <input type="text" name="city" placeholder="請輸入縣市" className="p-4 rounded-lg text-black" required value={formData.city} onChange={handleInputChange} />
                 <input type="text" name="district" placeholder="請輸入鄉鎮" className="p-4 rounded-lg text-black" required value={formData.district} onChange={handleInputChange} />
                 <input type="text" name="address" placeholder="請輸入詳細地址" className="col-span-2 p-4 rounded-lg text-black" required value={formData.address} onChange={handleInputChange} />
@@ -194,7 +166,6 @@ function App() {
             </div>
             <button type='submit' className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg mb-4">完成註冊</button>
             </section>
-
             <p>
               <span className="text-white">已經有會員了嗎？</span>
               <Link to="/login" className="text-primary-100 hover:text-primary-120 underline ml-2">立即登入</Link>
