@@ -39,7 +39,7 @@ function App() {
     { path: '/',secure: true,sameSite :true}
     );
     console.log(cookies.get('enjoyment-luxury-token'));
-    };
+  };
   
   // const getAuthToken = () => {
   //   if (cookies.get('enjoyment-luxury-token')===undefined){

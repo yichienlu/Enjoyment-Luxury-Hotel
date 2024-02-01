@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
+import Cookies from 'universal-cookie'
 import ZipCodeMap from "./zipcodes"
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
     axios.post('https://enjoyment-luxury-api.onrender.com/api/v1/user/signup', data)
     .then(res=>{
       console.log(res.data)
+      setToken(res.data.token)
       alert('註冊成功')
       navigate('/')
     })
@@ -70,6 +72,14 @@ function App() {
     event.preventDefault()
     formatFormData()
   }
+
+  const cookies = new Cookies();
+  const setToken = (token:string) => {
+    cookies.set('enjoyment-luxury-token', token, 
+    { path: '/',secure: true,sameSite :true}
+    );
+    console.log(cookies.get('enjoyment-luxury-token'));
+  };
 
   return (
     <>
