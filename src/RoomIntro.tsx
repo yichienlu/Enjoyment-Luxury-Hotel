@@ -35,7 +35,7 @@ function RoomIntro(){
           {...swiperRoomParams}
         >
           <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
+            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
               <div className="lg:flex items-end ">
                 <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
                 <div className="text-white lg:px-20 pb-20 lg:pb-24">
@@ -59,7 +59,7 @@ function RoomIntro(){
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom] bg-[size:contain] bg-no-repeat ">
+            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
               <div className="lg:flex items-end ">
                 <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/flagged/photo-1573168710865-2e4c680d921a')] bg-center bg-cover"></div>
                 <div className="text-white lg:px-20 pb-20 lg:pb-24">
@@ -83,7 +83,7 @@ function RoomIntro(){
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
+            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
               <div className="lg:flex items-end ">
                 <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0')] bg-center bg-cover"></div>
                 <div className="text-white lg:px-20 pb-20 lg:pb-24">
@@ -107,7 +107,7 @@ function RoomIntro(){
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
+            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('../images/desktop-deco-BG.png'),url('../images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
               <div className="lg:flex items-end ">
                 <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1560185893-a55cbc8c57e8')] bg-center bg-cover"></div>
                 <div className="text-white lg:px-20 pb-20 lg:pb-24">
