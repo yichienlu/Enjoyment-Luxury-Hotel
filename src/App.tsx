@@ -2,7 +2,32 @@
 import { Link } from "react-router-dom";
 import FoodList from "./FoodList.tsx"
 
+
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import './swiper.scss';
+
+// import required modules
+import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+
+
 function App() {
+
+  const swiperParams = {
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  }
+
   return (
     <>
      <header className="w-full flex items-center justify-between text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-20">
@@ -101,20 +126,46 @@ function App() {
     </div>
   </section>
   {/* <!-- 房間介紹 --> */}
-  <section className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat">
+  <section className="bg-neu-100">
+  <Swiper
+        className="mySwiper w-full"
+         {...swiperParams}
+        effect={'fade'}
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[EffectFade, Navigation, Pagination]}
+      >
+        <SwiperSlide>
+          <div className="w-full bg-neu-100">1</div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="w-full bg-neu-100">2</div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="w-full bg-neu-100">3</div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="w-full bg-neu-100">4</div>
+        </SwiperSlide>
+      </Swiper>
+  </section>
+  <section className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat relative">
     <div className="lg:flex items-end">
       <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
-      <div className="text-white lg:px-20">
+      <div className="text-white lg:px-20 pb-20 lg:pb-24">
         <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">尊爵雙人房</h3>
         <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。</p>
         <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">NT$ 10,000</h4>
-        <button className="mb-6 lg:mb-10 w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold">查看更多</button>
-        <div className="flex justify-end">
+        <button className=" w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold">查看更多</button>
+      </div>
+    </div>
+
+    <div className="absolute right-5 lg:right-20 bottom-20 lg:bottom-30 flex justify-end">
           <button className="p-4 text-primary-100 hover:text-primary-40"><span className="inline-block w-6 h-6">←</span></button>
           <button className="p-4 text-primary-100 hover:text-primary-40"><span className="inline-block w-6 h-6">→</span></button>
         </div>
-      </div>
-    </div>
   </section>
   {/* <!-- 佳餚美饌 --> */}
   <section className="relative">
