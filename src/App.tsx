@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import FoodList from "./FoodList.tsx";
+import RoomIntro from "./RoomIntro.tsx";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,7 +9,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./swiper.scss";
-import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 // import axios from 'axios';
 import Cookies from 'universal-cookie'
@@ -37,7 +38,6 @@ function App() {
     }
     return cookies.get('enjoyment-luxury-token');
   };
-
   const [loggedIn, setLoggedIn] = useState(false)
   function checkLoggedIn(){
     if(getAuthToken()){
@@ -46,31 +46,13 @@ function App() {
   }
   useEffect(()=>{
   checkLoggedIn()
-
-}, [])
+})
   // side menu
   const [sideOpen, setSideOpen] = useState(false)
   function toggleSideOpen(boolean:boolean){
     setSideOpen(boolean)
   }
 
-  const swiperRoomParams = {
-    modules: [EffectFade, Navigation, Pagination, Autoplay],
-    effect: "fade",
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    speed: 300,
-    pagination: {
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-navigation-next",
-      prevEl: ".swiper-navigation-prev",
-    },
-  };
   const swiperBannerParams = {
     modules: [Pagination, Autoplay],
     loop: true,
@@ -160,13 +142,8 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="absolute flex gap-2 bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-15 h-1 bg-primary-100 rounded-full"></div>
-          <div className="w-8 h-1 bg-primary-40 rounded-full"></div>
-          <div className="w-8 h-1 bg-primary-40 rounded-full"></div>
-          <div className="w-8 h-1 bg-primary-40 rounded-full"></div>
-        </div>
       </section>
+
       {/* 最新消息 */}
       <section id="news" className="bg-primary-10  py-20 lg:py-30 px-5 lg:px-20 relative">
         <img src="images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute left-50 -bottom-20" />
@@ -223,6 +200,7 @@ function App() {
           </div>
         </div>
       </section>
+
       {/* <!-- 關於我們 --> */}
       <section className="bg-neu-100 pt-20 lg:pt-30 pb-30 lg:pb-50">
         <div className="bg-[url('https://images.unsplash.com/photo-1582719508461-905c673771fd')] bg-cover bg-center pr-5 pl-10 lg:px-20">
@@ -255,165 +233,7 @@ function App() {
         </div>
       </section>
       {/* <!-- 房間介紹 --> */}
-      <section className="bg-neu-100">
-        <Swiper
-          id="index-room-swiper"
-          className="mySwiper w-full relative"
-          {...swiperRoomParams}
-        >
-          <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
-              <div className="lg:flex items-end ">
-                <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
-                <div className="text-white lg:px-20 pb-20 lg:pb-24">
-                  <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">
-                    尊爵雙人房
-                  </h3>
-                  <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">
-                    享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
-                  </p>
-                  <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">
-                    NT$ 10,000
-                  </h4>
-                  <button
-                    type="button"
-                    className="cursor-pointer w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold"
-                  >
-                    查看更多
-                  </button>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
-              <div className="lg:flex items-end ">
-                <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/flagged/photo-1573168710865-2e4c680d921a')] bg-center bg-cover"></div>
-                <div className="text-white lg:px-20 pb-20 lg:pb-24">
-                  <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">
-                    景觀雙人房
-                  </h3>
-                  <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">
-                    景觀雙人房擁有絕美的高雄市景觀，讓您在舒適的環境中欣賞城市之美。
-                  </p>
-                  <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">
-                    NT$ 12,000
-                  </h4>
-                  <button
-                    type="button"
-                    className="cursor-pointer w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold"
-                  >
-                    查看更多
-                  </button>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
-              <div className="lg:flex items-end ">
-                <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0')] bg-center bg-cover"></div>
-                <div className="text-white lg:px-20 pb-20 lg:pb-24">
-                  <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">
-                    豪華雅緻房
-                  </h3>
-                  <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">
-                    享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
-                  </p>
-                  <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">
-                    NT$ 15,000
-                  </h4>
-                  <button
-                    type="button"
-                    className="cursor-pointer w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold z-20"
-                  >
-                    查看更多
-                  </button>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
-              <div className="lg:flex items-end ">
-                <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1560185893-a55cbc8c57e8')] bg-center bg-cover"></div>
-                <div className="text-white lg:px-20 pb-20 lg:pb-24">
-                  <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">
-                    景觀尊榮家庭房
-                  </h3>
-                  <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">
-                    景觀尊榮家庭房不僅有寬敞的空間，還有絕美的市景視野，是帶給家庭最尊榮的待遇。
-                  </p>
-                  <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">
-                    NT$ 20,000
-                  </h4>
-                  <button
-                    type="button"
-                    className="cursor-pointer w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold"
-                  >
-                    查看更多
-                  </button>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/* navigation */}
-          <div className="absolute right-5 lg:right-20 bottom-20 lg:bottom-30 flex justify-end z-10">
-            <button className="swiper-navigation-prev p-4 group">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
-                <path d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z" fill=""/>
-              </svg>
-            </button>
-            <button className="swiper-navigation-next p-4 group">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
-                  <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill=""/>
-              </svg>
-            </button>
-          </div>
-        </Swiper>
-      </section>
-      <section className="relative hidden">
-        <div className="py-20 lg:py-30 px-5 lg:px-0 bg-neu-100 bg-[url('images/desktop-deco-BG.png'),url('images/desktop-deco-Line.png')] bg-[position:bottom,top_180px_right_0] bg-[size:contain,63%_auto] bg-no-repeat ">
-          <div className="lg:flex items-end ">
-            <div className="w-full lg:w-[900px] h-[300px] sm:h-[600px] lg:h-[900px] mb-6 lg:mb-0 bg-[url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')] bg-center bg-cover"></div>
-            <div className="text-white lg:px-20 pb-20 lg:pb-24">
-              <h3 className="mb-2 lg:mb-4 text-[28px] lg:text-[40px] font-bold">
-                尊爵雙人房
-              </h3>
-              <p className="mb-6 lg:mb-10 text-sm lg:text-base font-normal">
-                享受高級的住宿體驗，尊爵雙人房提供給您舒適寬敞的空間和精緻的裝潢。
-              </p>
-              <h4 className="mb-6 lg:mb-10 font-bold text-2xl lg:text-[32px]">
-                NT$ 10,000
-              </h4>
-              <button className=" w-full bg-white hover:bg-primary-100 text-black hover:text-white p-5 lg:text-2xl font-bold">
-                查看更多
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* pagination */}
-        <ul className="absolute top-[360px] sm:top-[660px] lg:top-auto lg:bottom-36 flex w-full xl:w-[900px] justify-center gap-2">
-          <li className="h-1 w-15 bg-primary-100 rounded-full"></li>
-          <li className="h-1 w-8 bg-primary-40 rounded-full"></li>
-          <li className="h-1 w-8 bg-primary-40 rounded-full"></li>
-          <li className="h-1 w-8 bg-primary-40 rounded-full"></li>
-        </ul>
-
-        {/* navigation */}
-        <div className="absolute right-5 lg:right-20 bottom-20 lg:bottom-30 flex justify-end">
-          <button className="p-4 text-primary-100 hover:text-primary-40">
-            <span className="inline-block w-6 h-6">←</span>
-          </button>
-          <button className="p-4 text-primary-100 hover:text-primary-40">
-            <span className="inline-block w-6 h-6">→</span>
-          </button>
-        </div>
-      </section>
+      <RoomIntro />
 
       {/* <!-- 佳餚美饌 --> */}
       <section className="relative">
@@ -433,6 +253,7 @@ function App() {
           </div>
         </div>
       </section>
+
       {/* <!-- 交通方式 --> */}
       <section className="bg-neu-100 py-20 lg:pt-30 px-5 lg:px-20">
         <div className="container">
@@ -473,6 +294,7 @@ function App() {
       </section>
       <img src="images/mobile-deco-Line.png" alt="" className="lg:hidden bg-neu-100" />
       <img src="images/desktop-deco-Line-2.png" alt="" className="hidden lg:block bg-neu-100" />
+
       {/* <!-- Footer --> */}
       <footer className="bg-neu-100  text-white px-5 lg:px-20">
         <div className="container py-20 lg:pb-30">
