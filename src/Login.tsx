@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
-
+import Cookies from 'universal-cookie'
 
 function App() {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function App() {
     axios.post('https://enjoyment-luxury-api.onrender.com/api/v1/user/login', formData)
     .then(res=>{
       console.log(res.data)
+      setToken(res.data.token)
       alert('登入成功')
       navigate('/')
     })
@@ -31,6 +32,22 @@ function App() {
       [name]:value
     })
   }
+
+  const cookies = new Cookies();
+  const setToken = (token:string) => {
+    cookies.set('enjoyment-luxury-token', token, 
+    { path: '/',secure: true,sameSite :true}
+    );
+    console.log(cookies.get('enjoyment-luxury-token'));
+    };
+  
+  // const getAuthToken = () => {
+  //   if (cookies.get('enjoyment-luxury-token')===undefined){
+  //     return '';
+  //   }
+  //   return cookies.get('enjoyment-luxury-token');
+  // };
+  
 
   return (
     <>

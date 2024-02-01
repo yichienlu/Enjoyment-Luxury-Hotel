@@ -10,24 +10,45 @@ import "swiper/css/pagination";
 import "./swiper.scss";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 
-function App() {
-  const [scrolled, setScrolled] = useState(false)
+// import axios from 'axios';
+import Cookies from 'universal-cookie'
 
+
+function App() {
+
+  // navbar bg
+  const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > window.innerHeight;
       setScrolled(isScrolled);
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  //  logged in
+  const cookies = new Cookies();
+  const getAuthToken = () => {
+    if (cookies.get('enjoyment-luxury-token')===undefined){
+      return '';
+    }
+    return cookies.get('enjoyment-luxury-token');
+  };
 
+  const [loggedIn, setLoggedIn] = useState(false)
+  function checkLoggedIn(){
+    if(getAuthToken()){
+      setLoggedIn(true)
+    }
+  }
+  useEffect(()=>{
+  checkLoggedIn()
 
+}, [])
+  // side menu
   const [sideOpen, setSideOpen] = useState(false)
   function toggleSideOpen(boolean:boolean){
     setSideOpen(boolean)
@@ -72,9 +93,21 @@ function App() {
           <a href="#" className="block p-4 hover:text-primary-100 text-center">
             客房旅宿
           </a>
+          {loggedIn ?
+          <Link to="/" className="block p-4 hover:text-primary-100 text-center">
+            {
+              sideOpen ? 
+              <span>會員中心</span>:
+              <div className="flex items-center gap-2">
+                <img src="https://images.unsplash.com/photo-1479740030693-66ad10f3a7b0" alt="" className="w-5 h-5 rounded-full" />
+                <span>John Doe</span>
+              </div>
+            }
+          </Link> :
           <Link to="/login" className="block p-4 hover:text-primary-100 text-center">
             會員登入
           </Link>
+          }
           <button className="block py-4 px-8 bg-primary-100 hover:bg-primary-120 rounded-lg">
             立即訂房
           </button>
