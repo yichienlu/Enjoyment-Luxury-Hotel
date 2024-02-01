@@ -62,7 +62,7 @@ function App() {
         </header>
         <div className="lg:h-dvh w-full grid grid-cols-1 lg:grid-cols-2">
           <div className="hidden min-h-dvh h-full lg:block bg-[url('https://images.unsplash.com/photo-1630587148265-761cbd139043?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center"></div>
-          <div className="h-full font-bold px-5 overflow-y-auto relative bg-[url('images/mobile-deco-login.png')] lg:bg-[url('../images/desktop-deco-login.png')] bg-center bg-no-repeat bg-contain">
+          <div className="h-full font-bold px-5 overflow-y-auto relative bg-[url('../images/mobile-deco-login.png')] lg:bg-[url('../images/desktop-deco-login.png')] bg-center bg-no-repeat bg-contain">
             <div className="h-full w-full grid items-center">
               <div className="max-w-[416px] w-full mx-auto py-5 lg:py-20">
                 <p className="text-sm lg:text-base mb-2 text-primary-100">享樂酒店，誠摯歡迎</p>
