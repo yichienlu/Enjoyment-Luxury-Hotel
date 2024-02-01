@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 function App() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email:"",
@@ -40,7 +40,7 @@ function App() {
           <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
         </Link>
           <button className="text-white lg:hidden">
-          <img src="../public/images/icon/ic_menu.svg" alt="" className='p-2 fill-white' />
+          <img src="images/icon/ic_menu.svg" alt="" className='p-2 fill-white' />
           </button>
         </header>
         <div className="lg:h-dvh w-full grid grid-cols-1 lg:grid-cols-2">

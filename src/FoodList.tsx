@@ -13,7 +13,7 @@ function FoodList(){
   };
   const moveFoodList = (event: React.PointerEvent<HTMLDivElement>) => {
     if(movable=='true' &&food_list.current && food_list_container.current){
-      let offset_right = food_list.current.offsetLeft + food_list.current.offsetWidth - food_list_container.current.offsetWidth
+      const offset_right = food_list.current.offsetLeft + food_list.current.offsetWidth - food_list_container.current.offsetWidth
       let movement = Number(food_list.current.style.left.split('px')[0])
       if(movement+event.movementX<=0 && offset_right+event.movementX > 0){
         movement += event.movementX

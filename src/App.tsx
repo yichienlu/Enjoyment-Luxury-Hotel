@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import FoodList from "./FoodList.tsx";
 
@@ -11,6 +11,23 @@ import "./swiper.scss";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 
 function App() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > window.innerHeight;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
   const [sideOpen, setSideOpen] = useState(false)
   function toggleSideOpen(boolean:boolean){
     setSideOpen(boolean)
@@ -44,16 +61,12 @@ function App() {
 
   return (
     <>
-      <header className={`w-full flex items-center ${sideOpen==true ? 'justify-center' : 'justify-between'} text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-30 ${sideOpen==true ? 'h-full bg-neu-100' : ''}`}>
+      <header className={`w-full flex items-center ${sideOpen==true ? 'justify-center' : 'justify-between'} text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-30 ${sideOpen==true ? 'h-full bg-neu-100' : ''} ${scrolled? 'bg-neu-100/80':''} duration-300`}>
         <a href="#" className={`${sideOpen==true? 'hidden':''}`}>
-          <img
-            src="images/logo-white.png"
-            alt=""
-            className="h-10 lg:h-[72px]"
-          />
+          <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
         </a>
         <button className={`${sideOpen==true? 'hidden':'lg:hidden'} text-white`} onClick={()=>toggleSideOpen(true)}>
-          <img src="../public/images/icon/ic_menu.svg" alt="" />
+          <img src="images/icon/ic_menu.svg" alt="" />
         </button>
         <div className={`${sideOpen==true? 'flex flex-col':'hidden lg:flex'}  gap-4`}>
           <a href="#" className="block p-4 hover:text-primary-100 text-center">
@@ -67,8 +80,7 @@ function App() {
           </button>
         </div>
         <button className={`absolute top-4 right-4 ${sideOpen==true? '':'hidden'}`} onClick={()=>toggleSideOpen(false)}>
-          <img src="../public/images/icon/ic_close.svg" alt="" className='p-2 fill-white' />
-          
+          <img src="images/icon/ic_close.svg" alt="" className='p-2 fill-white' />
         </button>
       </header>
       <section id="banner" className="h-[100vh] relative">
@@ -123,20 +135,9 @@ function App() {
         </div>
       </section>
       {/* 最新消息 */}
-      <section
-        id="news"
-        className="bg-primary-10  py-20 lg:py-30 px-5 lg:px-20 relative"
-      >
-        <img
-          src="images/desktop-deco-dot.png"
-          alt=""
-          className="hidden lg:block w-50 h-50 absolute left-50 -bottom-20"
-        />
-        <img
-          src="images/desktop-deco-dot.png"
-          alt=""
-          className="hidden lg:block w-50 h-50 absolute right-[180px] top-[100px]"
-        />
+      <section id="news" className="bg-primary-10  py-20 lg:py-30 px-5 lg:px-20 relative">
+        <img src="images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute left-50 -bottom-20" />
+        <img src="images/desktop-deco-dot.png" alt="" className="hidden lg:block w-50 h-50 absolute right-[180px] top-[100px]" />
         <div className="container lg:flex ">
           <div className="mr-20 mb-10 lg:mb-0">
             <h2 className="text-[32px] lg:text-[48px] text-primary-100 tracking-[2.4px] font-bold">
@@ -147,10 +148,7 @@ function App() {
             <div className="w-[140px] h-[2px] bg-gradient-primary mt-6 lg:mt-10"></div>
           </div>
           <div className="text-black">
-            <a
-              href="#"
-              className="block lg:flex items-center mb-10 group duration-200"
-            >
+            <a href="#" className="block lg:flex items-center mb-10 group duration-200" >
               <div className="lg:w-5/12 h-[294px] mb-6 lg:mb-0 lg:mr-6 shrink-0 rounded-lg overflow-hidden">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1615722440048-da4ccf6de048')] bg-center bg-cover group-hover:scale-105 duration-200"></div>
               </div>
@@ -163,10 +161,7 @@ function App() {
                 </p>
               </div>
             </a>
-            <a
-              href="#"
-              className="block lg:flex items-center mb-10 group duration-200"
-            >
+            <a href="#" className="block lg:flex items-center mb-10 group duration-200" >
               <div className="lg:w-5/12 h-[294px] mb-6 lg:mb-0 lg:mr-6 shrink-0 rounded-lg overflow-hidden">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1445991842772-097fea258e7b')] bg-center bg-cover group-hover:scale-105 duration-200"></div>
               </div>
@@ -179,10 +174,7 @@ function App() {
                 </p>
               </div>
             </a>
-            <a
-              href="#"
-              className="block lg:flex items-center group duration-200"
-            >
+            <a href="#" className="block lg:flex items-center group duration-200" >
               <div className="lg:w-5/12 h-[294px] mb-6 lg:mb-0 lg:mr-6 shrink-0 rounded-lg overflow-hidden">
                 <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1479740030693-66ad10f3a7b0')] bg-center bg-cover group-hover:scale-105 duration-200"></div>
               </div>
@@ -211,7 +203,6 @@ function App() {
                 </span>
                 <div className="grow sm:grow-0 shrink sm:w-[165px] h-0.5 bg-white ml-10"></div>
               </h2>
-
               <p className="mb-4 lg:mb-10 text-sm lg:text-base">
                 享樂酒店，位於美麗島高雄的心臟地帶，是這座城市的璀璨瑰寶與傲人地標。
                 我們的存在，不僅僅是為了提供奢華的住宿體驗，更是為了將高雄的美麗與活力，獻給每一位蒞臨的旅客。
@@ -341,16 +332,12 @@ function App() {
               className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
                 <path d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z" fill=""/>
               </svg>
-
             </button>
             <button className="swiper-navigation-next p-4 group">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                 className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
-
                   <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill=""/>
-
               </svg>
-
             </button>
           </div>
         </Swiper>
@@ -397,16 +384,8 @@ function App() {
 
       {/* <!-- 佳餚美饌 --> */}
       <section className="relative">
-        <img
-          src="images/desktop-deco-Line-1.png"
-          alt=""
-          className="absolute  left-10 -bottom-20"
-        />
-        <img
-          src="images/desktop-deco-dot.png"
-          alt=""
-          className="absolute right-20 -top-10"
-        />
+        <img src="images/desktop-deco-Line-1.png" alt="" className="absolute  left-10 -bottom-20" />
+        <img src="images/desktop-deco-dot.png" alt="" className="absolute right-20 -top-10" />
         <div className="bg-light px-5 lg:px-20 py-20 lg:py-30  overflow-x-hidden">
           <div className="container">
             <div className="flex items-center mb-10 lg:mb-20">
@@ -436,33 +415,21 @@ function App() {
           <div className="w-full h-[360px] bg-[url('https://s3-alpha-sig.figma.com/img/4dd7/3a80/9458afb0d3233560c66a7177e1d6ade3?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FpsFej~R-sQ0QKJvUqddH6CepLGuKe4BGr8-k6jLrreBdb08PclhdpcEi4Miz6s~xX6Y24xXBUo0Ue5Y7NO7hQwwwa13vsLryk-1ivJ9OYW~8nqSZ6pUmbW4669bW4zKOx3lVuIHwYHhAD0WN0j6HLKsK4HmIIBhqgvu58Bsp0KRuBi2DPGa-GNzghltDj9-FiSKOtqby83ZEmvmPrDaioXWVtfHvgAI48BsrFnadL7f9P416Vd1xcelNn5k5mIE1u2kx2Qdj422GqWDe4MDeeHY13ZyrAbAydsrXIFtbzlVT2Gv5Bp~j8p6Gt0oMstj-3uEx8y-A~7NddjBoYQlRA__')] bg-cover bg-center mb-10"></div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-white">
             <div className="">
-              <img
-                src="images/traffic-car.png"
-                alt=""
-                className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4"
-              />
+              <img src="images/traffic-car.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
               <h3 className="lg:text-2xl mb-2">自行開車</h3>
               <p className="text-sm lg:text-normal font-normal">
                 如果您選擇自行開車，可以透過國道一號下高雄交流道，往市區方向行駛，並依路標指示即可抵達「享樂酒店」。飯店內設有停車場，讓您停車方便。
               </p>
             </div>
             <div>
-              <img
-                src="images/traffic-train.png"
-                alt=""
-                className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4"
-              />
+              <img src="images/traffic-train.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
               <h3 className="lg:text-2xl mb-2">高鐵/火車</h3>
               <p className="text-sm lg:text-normal font-normal">
                 如果您是搭乘高鐵或火車，可於左營站下車，外頭有計程車站，搭乘計程車約20分鐘即可抵達。或者您也可以轉乘捷運紅線至中央公園站下車，步行約10分鐘便可抵達。
               </p>
             </div>
             <div>
-              <img
-                src="images/traffic-luxurycar.png"
-                alt=""
-                className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4"
-              />
+              <img  src="images/traffic-luxurycar.png" alt="" className="w-12 h-12 lg:w-20 lg:h-20 mb-2 lg:mb-4" />
               <h3 className="lg:text-2xl mb-2">禮賓車服務</h3>
               <p className="text-sm lg:text-normal font-normal">
                 承億酒店提供禮賓專車接送服務，但因目的地遠近會有不同的收費，請撥打電話將由專人為您服務洽詢專線：(07)123-4567
@@ -471,39 +438,21 @@ function App() {
           </div>
         </div>
       </section>
-      <img
-        src="images/mobile-deco-Line.png"
-        alt=""
-        className="lg:hidden bg-neu-100"
-      />
-      <img
-        src="images/desktop-deco-Line-2.png"
-        alt=""
-        className="hidden lg:block bg-neu-100"
-      />
+      <img src="images/mobile-deco-Line.png" alt="" className="lg:hidden bg-neu-100" />
+      <img src="images/desktop-deco-Line-2.png" alt="" className="hidden lg:block bg-neu-100" />
       {/* <!-- Footer --> */}
       <footer className="bg-neu-100  text-white px-5 lg:px-20">
         <div className="container py-20 lg:pb-30">
           <div className="lg:flex justify-between">
             <div className="mb-10 lg:mb-0">
               <a href="#" className="block w-[196px] h-[72px] mb-10">
-                <img
-                  src="images/logo-white.png"
-                  alt=""
-                  className="h-10 lg:h-[72px]"
-                />
+                <img src="images/logo-white.png" alt="" className="h-10 lg:h-[72px]" />
               </a>
               <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 border border-white rounded-full flex justify-center items-center"
-                >
+                <a href="#" className="w-10 h-10 border border-white rounded-full flex justify-center items-center" >
                   <img src="images/social-line.png" alt="" />
                 </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 border border-white rounded-full flex justify-center items-center"
-                >
+                <a href="#" className="w-10 h-10 border border-white rounded-full flex justify-center items-center" >
                   <img src="images/social-instagram.png" alt="" />
                 </a>
               </div>
@@ -511,34 +460,21 @@ function App() {
             <div className="lg:flex gap-20">
               <div>
                 <div className="mb-2 font-bold">TEL</div>
-                <a
-                  href="tel:+886-7-1234567"
-                  className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base"
-                >
+                <a href="tel:+886-7-1234567" className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base" >
                   +886-7-1234567
                 </a>
                 <div className="mb-2 font-bold">FAX</div>
-                <a
-                  href="tel:+886-7-1234567"
-                  className="block mb-4 hover:text-primary-100 text-sm lg:text-base"
-                >
+                <a href="tel:+886-7-1234567" className="block mb-4 hover:text-primary-100 text-sm lg:text-base" >
                   +886-7-1234567
                 </a>
               </div>
               <div>
                 <div className="mb-2 font-bold">MAIL</div>
-                <a
-                  href="mailto:elh@hexschool.com"
-                  className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base"
-                >
+                <a href="mailto:elh@hexschool.com" className="block mb-4 lg:mb-10 hover:text-primary-100 text-sm lg:text-base" >
                   elh@hexschool.com
                 </a>
                 <div className="mb-2 font-bold">WEB</div>
-                <a
-                  href="https://www.elhhexschool.com.tw"
-                  target="_blank"
-                  className="block mb-4 hover:text-primary-100 text-sm lg:text-base"
-                >
+                <a href="https://www.elhhexschool.com.tw" target="_blank" className="block mb-4 hover:text-primary-100 text-sm g:text-base" >
                   www.elhhexschool.com.tw
                 </a>
               </div>
