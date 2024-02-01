@@ -1,4 +1,4 @@
-// import React, { useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Link } from "react-router-dom";
 import FoodList from "./FoodList.tsx";
 
@@ -11,6 +11,11 @@ import "./swiper.scss";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 
 function App() {
+  const [sideOpen, setSideOpen] = useState(false)
+  function toggleSideOpen(boolean:boolean){
+    setSideOpen(boolean)
+  }
+
   const swiperRoomParams = {
     modules: [EffectFade, Navigation, Pagination, Autoplay],
     effect: "fade",
@@ -39,30 +44,34 @@ function App() {
 
   return (
     <>
-      <header className="w-full flex items-center justify-between text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-20">
-        <a href="#">
+      <header className={`w-full flex items-center ${sideOpen==true ? 'justify-center' : 'justify-between'} text-white fixed top-0 px-3 lg:px-20 py-4 lg:py-6 z-30 ${sideOpen==true ? 'h-full bg-neu-100' : ''}`}>
+        <a href="#" className={`${sideOpen==true? 'hidden':''}`}>
           <img
             src="images/logo-white.png"
             alt=""
             className="h-10 lg:h-[72px]"
           />
         </a>
-        <button className="lg:hidden">-</button>
-        <div className="hidden lg:flex gap-4">
-          <a href="#" className="block p-4 hover:text-primary-100">
+        <button className={`${sideOpen==true? 'hidden':'lg:hidden'} text-white`} onClick={()=>toggleSideOpen(true)}>
+          <img src="../public/images/icon/ic_menu.svg" alt="" />
+        </button>
+        <div className={`${sideOpen==true? 'flex flex-col':'hidden lg:flex'}  gap-4`}>
+          <a href="#" className="block p-4 hover:text-primary-100 text-center">
             客房旅宿
           </a>
-          <Link to="/login" className="block p-4 hover:text-primary-100">
+          <Link to="/login" className="block p-4 hover:text-primary-100 text-center">
             會員登入
           </Link>
           <button className="block py-4 px-8 bg-primary-100 hover:bg-primary-120 rounded-lg">
             立即訂房
           </button>
         </div>
+        <button className={`absolute top-4 right-4 ${sideOpen==true? '':'hidden'}`} onClick={()=>toggleSideOpen(false)}>
+          <img src="../public/images/icon/ic_close.svg" alt="" className='p-2 fill-white' />
+          
+        </button>
       </header>
       <section id="banner" className="h-[100vh] relative">
-        {/* <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559599238-308793637427')] bg-cover bg-center"></div> */}
-
         <Swiper
           id="index-banner-swiper"
           className="mySwiper h-[100dvh] absolute inset-0"
@@ -327,11 +336,21 @@ function App() {
 
           {/* navigation */}
           <div className="absolute right-5 lg:right-20 bottom-20 lg:bottom-30 flex justify-end z-10">
-            <button className="swiper-navigation-prev p-4 text-primary-100 hover:text-primary-40">
-              <span className="inline-block w-6 h-6">←</span>
+            <button className="swiper-navigation-prev p-4 group">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
+                <path d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z" fill=""/>
+              </svg>
+
             </button>
-            <button className="swiper-navigation-next p-4 text-primary-100 hover:text-primary-40">
-              <span className="inline-block w-6 h-6">→</span>
+            <button className="swiper-navigation-next p-4 group">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                className='fill-primary-100 group-hover:fill-primary-40 group-active:fill-primary-120'>
+
+                  <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill=""/>
+
+              </svg>
+
             </button>
           </div>
         </Swiper>
