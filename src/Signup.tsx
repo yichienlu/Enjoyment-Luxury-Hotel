@@ -7,7 +7,7 @@ import ZipCodeMap from "./zipcodes"
 function App() {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
   const [checkPasswordInput, setCheckPasswordInput] = useState("")
   function nextStep(){
     if(checkPasswordInput==formData.password && formData.email && formData.password){
@@ -15,9 +15,23 @@ function App() {
     }
   }
 
-  function findZipcode(){
-    const area = `${formData.city}${formData.district}`
-    return ZipCodeMap.find(item=>item.detail.includes(area))?.zipcode
+  type District = {
+    detail:string;
+    zipcode:number;
+    city:string;
+    county:string
+  }
+  const [districts, setDistricts] = useState<District[]>([])
+  const districtSet = new Set(ZipCodeMap.map(item=>item.city))
+  const cities = Array.from(districtSet)
+  function findDistricts(city:string){
+    const districtsList = ZipCodeMap.filter(item=>item.city==city)
+    setDistricts([...districtsList])
+    setFormData({
+      ...formData,
+      city:city,
+      district:"000"
+    })
   }
 
   const [formData, setFormData] = useState({
@@ -29,7 +43,7 @@ function App() {
     day:"",
     year:"",
     city:"",
-    district:"",
+    district:"000",
     address:""
   })
 
@@ -41,7 +55,7 @@ function App() {
       phone: formData.phone,
       birthday:`${formData.year}/${formData.month}/${formData.day}`,
       address:{
-        zipcode:findZipcode(),
+        zipcode:formData.district,
         detail: formData.address
       }
     }
@@ -116,9 +130,9 @@ function App() {
               <p className={`mt-1 ${step==1? 'text-neu-60' : 'text-white'}`}>填寫基本資料</p>
             </div>
           </div>
-          <form className=" appearance-none text-sm lg:text-base " onSubmit={handleSubmit}>
-            <section id="step1" className={`text-white ${step==1 ? 'block' : 'hidden'}`}>
-            <div>
+          {/* 第一步表單 */}
+          <form id="step1" className={`appearance-none text-sm lg:text-base text-white ${step==1 ? 'block' : 'hidden'}`}>
+          <div>
               <label htmlFor="emailInput" className="text-white block mb-2">電子信箱</label>
               <input type="email" name="email" id="emailInput" placeholder="hello@example.com" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.email} onChange={handleInputChange}/>
             </div>
@@ -131,9 +145,10 @@ function App() {
               <input type="password" id="checkPasswordInput" placeholder="請再輸入一次密碼" minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={checkPasswordInput} onChange={e=>setCheckPasswordInput(e.target.value)} />
             </div>
             <button type="button" className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg my-10" onClick={()=>nextStep()} disabled={checkPasswordInput==formData.password && formData.email && formData.password ? false : true}>下一步</button>
-            </section>
+          </form>
 
-            <section id="step2" className={`text-white ${step==2 ? 'block' : 'hidden'}`}>
+          {/* 第二步表單 */}
+          <form id="step2" className={`appearance-none text-sm lg:text-base text-white ${step==2 ? 'block' : 'hidden'}`} onSubmit={handleSubmit}>
             <div>
               <label htmlFor="nameInput" className="text-white block mb-2">姓名</label>
               <input type="text" name="name" id="nameInput" placeholder="請輸入姓名" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.name} onChange={handleInputChange} />
@@ -161,14 +176,28 @@ function App() {
                   <option value="11">11月</option>
                   <option value="12">12月</option>
                 </select>
-                <input type="number" min="1" max="31" step="1" name="day" placeholder="請輸入日期"  className="p-4 rounded-lg text-black" value={formData.day}  onChange={handleInputChange}/>
+                <input type="number" min="1" max={
+                  formData.month == '' ? 1 : 
+                  formData.month == '2' ? 28 : 
+                  formData.month == '4' || formData.month == '6' || formData.month == '9' || formData.month == '11' ? 30 : 31
+                } step="1" name="day" placeholder="請輸入日期"  className="p-4 rounded-lg text-black" value={formData.day}  onChange={handleInputChange}/>
               </div>
             </div>
             <div className="mb-4">
               <label htmlFor="countySelect" className="text-white block mb-2">地址</label>
               <div className="grid grid-cols-2 gap-2">
-                <input type="text" name="city" placeholder="請輸入縣市" className="p-4 rounded-lg text-black" required value={formData.city} onChange={handleInputChange} />
-                <input type="text" name="district" placeholder="請輸入鄉鎮" className="p-4 rounded-lg text-black" required value={formData.district} onChange={handleInputChange} />
+                <select name="city" id="" value={formData.city} className="p-4 rounded-lg text-black" required onChange={(e)=>{findDistricts(e.target.value);}}>
+                  <option value="" disabled >請選擇縣市</option>
+                  { cities.map(item=>
+                    <option value={item} key={item}>{item}</option>
+                  )}
+                </select>
+                <select name="district" id="" value={formData.district} className="p-4 rounded-lg text-black" required  onChange={handleInputChange}>
+                <option value="000" disabled >請選擇鄉鎮</option>
+                { districts.map(item=>
+                  <option value={item?.zipcode} key={item?.zipcode}>{item?.county}</option>
+                )}
+                </select>
                 <input type="text" name="address" placeholder="請輸入詳細地址" className="col-span-2 p-4 rounded-lg text-black" required value={formData.address} onChange={handleInputChange} />
               </div>
             </div>
@@ -177,7 +206,6 @@ function App() {
               <label htmlFor="readInfo" className="text-white ml-2">我已閱讀並同意本網站個資使用規範</label>
             </div>
             <button type='submit' className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg mb-4">完成註冊</button>
-            </section>
             <p>
               <span className="text-white">已經有會員了嗎？</span>
               <Link to="/login" className="text-primary-100 hover:text-primary-120 underline ml-2">立即登入</Link>
