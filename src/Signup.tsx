@@ -7,13 +7,9 @@ import ZipCodeMap from "./zipcodes"
 function App() {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const [checkPasswordInput, setCheckPasswordInput] = useState("")
-  function nextStep(){
-    if(checkPasswordInput==formData.password && formData.email && formData.password){
-      setStep(2)
-    }
-  }
+
 
   type District = {
     detail:string;
@@ -82,6 +78,21 @@ function App() {
     })
   }
 
+  const letterRegex = /[a-zA-Z]/;
+  const numberRegex = /\d/;
+  function handleSubmitFirst(event:React.FormEvent<HTMLFormElement>){
+    event.preventDefault()
+    if(checkPasswordInput!==formData.password){
+      alert("需輸入相同密碼")
+    } else if(!letterRegex.test(formData.password) 
+    || !numberRegex.test(formData.password)) {
+      alert("密碼須包含英文字母及數字")
+    } else {
+      console.log(formData)
+      setStep(2)
+    }
+  }
+  
   function handleSubmit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault()
     formatFormData()
@@ -131,20 +142,20 @@ function App() {
             </div>
           </div>
           {/* 第一步表單 */}
-          <form id="step1" className={`appearance-none text-sm lg:text-base text-white ${step==1 ? 'block' : 'hidden'}`}>
+          <form id="step1" className={`appearance-none text-sm lg:text-base text-white ${step==1 ? 'block' : 'hidden'}`} onSubmit={handleSubmitFirst}>
           <div>
               <label htmlFor="emailInput" className="text-white block mb-2">電子信箱</label>
-              <input type="email" name="email" id="emailInput" placeholder="hello@example.com" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.email} onChange={handleInputChange}/>
+              <input type="email" name="email" id="emailInput" placeholder="hello@example.com" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" required value={formData.email} onChange={handleInputChange}/>
             </div>
             <div>
               <label htmlFor="passwordInput" className="text-white block mb-2">密碼</label>
-              <input type="password" name="password" id="passwordInput" placeholder="請輸入密碼" minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.password} onChange={handleInputChange} />
+              <input type="password" name="password" id="passwordInput" placeholder="請輸入密碼" required minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.password} onChange={handleInputChange} />
             </div>
             <div>
               <label htmlFor="checkPasswordInput" className="text-white block mb-2">確認密碼</label>
-              <input type="password" id="checkPasswordInput" placeholder="請再輸入一次密碼" minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={checkPasswordInput} onChange={e=>setCheckPasswordInput(e.target.value)} />
+              <input type="password" id="checkPasswordInput" placeholder="請再輸入一次密碼" required minLength={8} className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={checkPasswordInput} onChange={e=>setCheckPasswordInput(e.target.value)} />
             </div>
-            <button type="button" className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg my-10" onClick={()=>nextStep()} disabled={checkPasswordInput==formData.password && formData.email && formData.password ? false : true}>下一步</button>
+            <button type="submit" className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg my-10" >下一步</button>
           </form>
 
           {/* 第二步表單 */}
@@ -186,13 +197,13 @@ function App() {
             <div className="mb-4">
               <label htmlFor="countySelect" className="text-white block mb-2">地址</label>
               <div className="grid grid-cols-2 gap-2">
-                <select name="city" id="" value={formData.city} className="p-4 rounded-lg text-black" required onChange={(e)=>{findDistricts(e.target.value);}}>
+                <select name="city" id="city" value={formData.city} className="p-4 rounded-lg text-black" required onChange={(e)=>{findDistricts(e.target.value);}}>
                   <option value="" disabled >請選擇縣市</option>
                   { cities.map(item=>
                     <option value={item} key={item}>{item}</option>
                   )}
                 </select>
-                <select name="district" id="" value={formData.district} className="p-4 rounded-lg text-black" required  onChange={handleInputChange}>
+                <select name="district" id="district" value={formData.district} className="p-4 rounded-lg text-black" required  onChange={handleInputChange}>
                 <option value="000" disabled >請選擇鄉鎮</option>
                 { districts.map(item=>
                   <option value={item?.zipcode} key={item?.zipcode}>{item?.county}</option>
