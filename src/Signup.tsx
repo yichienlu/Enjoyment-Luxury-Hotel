@@ -162,17 +162,17 @@ function App() {
           <form id="step2" className={`appearance-none text-sm lg:text-base text-white ${step==2 ? 'block' : 'hidden'}`} onSubmit={handleSubmit}>
             <div>
               <label htmlFor="nameInput" className="text-white block mb-2">姓名</label>
-              <input type="text" name="name" id="nameInput" placeholder="請輸入姓名" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.name} onChange={handleInputChange} />
+              <input type="text" name="name" id="nameInput" placeholder="請輸入姓名" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" required minLength={2} value={formData.name} onChange={handleInputChange} />
             </div>
             <div>
               <label htmlFor="telInput" className="text-white block mb-2">手機號碼</label>
-              <input type="tel" name="phone" id="telInput" placeholder="請輸入手機號碼" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" value={formData.phone} onChange={handleInputChange} />
+              <input type="tel" name="phone" id="telInput" placeholder="請輸入手機號碼" className="block w-full mb-4 p-4 rounded-lg text-black placeholder:text-[#909090] font-normal" required value={formData.phone} onChange={handleInputChange} />
             </div>
             <div className="mb-4">
               <label htmlFor="yearSelect" className="text-white block mb-2">生日</label>
               <div className="grid grid-cols-3 gap-2 font-normal ">
-                <input type="number" min="1900" max="2099" step="1" name="year" placeholder="請輸入年份"  className="p-4 rounded-lg text-black"  value={formData.year} onChange={handleInputChange}/>
-                <select name="month" id="monthSelect" className="p-4 rounded-lg text-black" value={formData.month} onChange={handleInputChange}>
+                <input type="number" min="1900" max="2099" step="1" name="year" placeholder="請輸入年份"  className="p-4 rounded-lg text-black" required value={formData.year} onChange={handleInputChange}/>
+                <select name="month" id="monthSelect" className="p-4 rounded-lg text-black" required value={formData.month} onChange={handleInputChange}>
                   <option value="" disabled>請選擇月份</option>
                   <option value="1">1月</option>
                   <option value="2">2月</option>
@@ -191,7 +191,7 @@ function App() {
                   formData.month == '' ? 1 : 
                   formData.month == '2' ? 28 : 
                   formData.month == '4' || formData.month == '6' || formData.month == '9' || formData.month == '11' ? 30 : 31
-                } step="1" name="day" placeholder="請輸入日期"  className="p-4 rounded-lg text-black" value={formData.day}  onChange={handleInputChange}/>
+                } step="1" name="day" placeholder="請輸入日期"  className="p-4 rounded-lg text-black" required value={formData.day}  onChange={handleInputChange}/>
               </div>
             </div>
             <div className="mb-4">
@@ -217,11 +217,11 @@ function App() {
               <label htmlFor="readInfo" className="text-white ml-2">我已閱讀並同意本網站個資使用規範</label>
             </div>
             <button type='submit' className="block w-full text-white bg-primary-100 hover:bg-primary-120 disabled:bg-neu-60 disabled:text-neu-40 py-4 rounded-lg mb-4">完成註冊</button>
-            <p>
+          </form>
+          <p>
               <span className="text-white">已經有會員了嗎？</span>
               <Link to="/login" className="text-primary-100 hover:text-primary-120 underline ml-2">立即登入</Link>
             </p>
-          </form>
         </div>
         </div>
       </div>
